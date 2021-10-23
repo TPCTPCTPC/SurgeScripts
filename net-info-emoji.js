@@ -17,6 +17,7 @@ const v4IP = v4.primaryAddress;
     }
     const ip = v4IP;
     const router = wifi.ssid ? v4.primaryRouter : undefined;
+    const networkstatus= wifi.ssid ? wifi.ssid : "Cellular";
 
     const resp = await $http.get("https://api.my-ip.io/ip");
     const externalIP = resp.body;
@@ -28,7 +29,7 @@ const v4IP = v4.primaryAddress;
     minutes = minutes > 9 ? minutes : "0" + minutes;
 
     const body = {
-        title: `📢 ${wifi.ssid}\t\t\t\t 🕰 ${hour}:${minutes}` || "📱 Cellular\t\t\t🕰 ${hour}:${minutes}",
+        title: "🚦" + networkstatus + "\t\t\t\t 🕰 " +  `${hour}:${minutes}`,
         content: `Device: ${ip}\n`
             + (wifi.ssid ? `Router: ${router}\n` : "")
             + `External: ${externalIP}`,
